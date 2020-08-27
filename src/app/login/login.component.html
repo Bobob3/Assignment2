@@ -16,7 +16,8 @@
           <label for="pass">Password</label>
           <input type="password" [(ngModel)]="password" name="password" class="form-control" id="pass" placeholder="Password">
         </div>
-        <button (click)="itemClicked()" class="btn btn-primary">Submit</button>
+        <button (click)="itemClicked($event)" type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <div id="errormsg">{{errormsg}}</div>
 </body>
 </html>

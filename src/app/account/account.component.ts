@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { User } from '../user';
 
 @Component({
   selector: 'app-account',
@@ -7,12 +8,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  email = "";
-  constructor(private route: ActivatedRoute) { }
+  currentUser:User;
+  username:string = "";
+  age:number = 0;
+  birthdate:string = "";
+  email:string = "";
+  constructor(private router: Router) { }
 
   ngOnInit(){
-    this.email = this.route.snapshot.params.email;
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    if(this.currentUser != null){
+      console.log(this.currentUser);
+      this.username = this.currentUser.username;
+      this.age = this.currentUser.age;
+      this.birthdate = this.currentUser.birthdate;
+    }
     
+    
+  }
+  updateprofile(){
+    this.currentUser = new User(this.username, this.birthdate, this.age);
+    sessionStorage.setItem('currentUser',JSON.stringify(this.currentUser));
+    this.router.navigate(['/profile']);
   }
   
 }

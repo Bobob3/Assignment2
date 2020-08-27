@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
+//const BACKEND_URL = 'http://localhost:3000';
 
 
 @Component({
@@ -8,17 +17,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  email:string = "";
+  password:string = "";
+  newuser:User;
+  errormsg:string = "";
+  userid ="";
 
-  email = "";
-  password = "";
-  users = [{ "email": 'abc@site.au', 'pwd': 'abc' }, { "email": 'jeff@site.au', "pwd": 'bca' }, { "email": 'sam@site.au', "pwd": 'cab' },]
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, private http: HttpClient, private route:ActivatedRoute) { }
+  
 
   ngOnInit() {
+    
   }
-  itemClicked() {
-    for (let i = 0; i < this.users.length; i++) {
+  itemClicked(event) {
+    event.preventDefault();
+    this.http.post<User>('http://localhost:3000/api/auth', {email: this.email, password: this.password}).subscribe(
+      data=>{
+        if(data.valid == true){
+          this.newuser = new User(data.username, data.birthdate,data.age,data.email)
+          sessionStorage.setItem('currentUser',JSON.stringify(this.newuser));
+          this.router.navigate(['/profile']);
+        }else{
+          this.errormsg =("There was a problem with the credentials");
+        }
+      });
+    
+    
+   /* for (let i = 0; i < this.users.length; i++) {
       if (this.email == this.users[i].email && this.password == this.users[i].pwd) {
         this.router.navigateByUrl('/account/' + this.email);
         break;
@@ -26,7 +52,7 @@ export class LoginComponent implements OnInit {
         alert("incorrect email or password");
 
       }
-    }
+    }*/
   }
 
 }
