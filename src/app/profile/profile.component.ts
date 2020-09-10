@@ -8,7 +8,7 @@ import { User } from '../user';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  id:number = 0;
+  id:number = null;
   username:string = "";
   newuser:User;
   constructor(private router:Router) { }

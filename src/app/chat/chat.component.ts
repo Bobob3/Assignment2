@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import { User } from '../user';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -17,7 +16,7 @@ export class ChatComponent implements OnInit {
   username:string = "";
   newuser:User;
   ioConnection:any;
-
+  Test = "";
   constructor(private socketService:SocketService, private router:Router) { }
 
   ngOnInit(){
@@ -26,6 +25,10 @@ export class ChatComponent implements OnInit {
     this.username = this.newuser.username;
     var json = JSON.parse(sessionStorage.getItem('msg'));
     console.log(json);
+    
+  }
+  createR(){
+    this.socketService.createRoom(this.Test);
   }
   private initIoConnection(){
      if(this.username != null){

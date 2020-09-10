@@ -24,6 +24,13 @@ export class SocketService {
       
     });
     return observable;
-  } 
+  }
+
+  public createRoom(room: string){
+    this.socket.on('create', function(room){
+      this.socket.join(room);
+      console.log(io.sockets.adapter.rooms);
+    })
+  }
 
 }

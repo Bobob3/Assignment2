@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.http.post<User>('http://localhost:3000/api/auth', {email: this.email, password: this.password}).subscribe(
       data=>{
         if(data.valid == true){
-          this.newuser = new User(data.username, data.email)
+          this.newuser = new User(data.username, data.email);
           sessionStorage.setItem('currentUser',JSON.stringify(this.newuser));
           this.router.navigate(['/chat']);
         }else{
