@@ -1,4 +1,4 @@
-<div class="container">
+<div id="container">
     <form >
         <div class="form-group">
             <label for="messageContent">New Message: </label>
@@ -9,6 +9,7 @@
         </div>
     </form>
     <h3>Chat Messages</h3>
+    
     <ul class="list-group">
         <li class="list-group-item" *ngFor = "let message of messages">{{message}}</li>
     </ul>

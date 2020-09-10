@@ -2,3 +2,16 @@
 #header{
     background-color: rgb(27, 22, 21);
 }
+
+.container{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 80%;
+    border: 2px solid black;
+}
+.title{
+    color: darkgoldenrod;
+}
+.list-group-item{
+    width: 20%;
+}

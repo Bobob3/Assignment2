@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import { User } from '../user';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -16,7 +17,6 @@ export class ChatComponent implements OnInit {
   username:string = "";
   newuser:User;
   ioConnection:any;
-  chatmsg = [];
 
   constructor(private socketService:SocketService, private router:Router) { }
 
@@ -24,24 +24,25 @@ export class ChatComponent implements OnInit {
     this.initIoConnection();
     this.newuser = JSON.parse(sessionStorage.getItem('currentUser'));
     this.username = this.newuser.username;
+    var json = JSON.parse(sessionStorage.getItem('msg'));
+    console.log(json);
   }
   private initIoConnection(){
-    this.chatmsg = JSON.parse(sessionStorage.getItem('msg'));
-    console.log(this.chatmsg);
-    if(this.username != null){
+     if(this.username != null){
       this.socketService.initSocket();
       this.ioConnection = this.socketService.onMessage()
         .subscribe((message:string)=>{
           this.messages.push(message);
+         // console.log(this.chatmsg);
           sessionStorage.setItem('msg',JSON.stringify(this.messages));
         });
     }else{
       this.router.navigate(['/login']);
-    }
+    } 
   }
   public chat(messageContent){
     if(this.messageContent){
-      this.socketService.send(this.newuser.username, this.messageContent);
+      this.socketService.send(this.messageContent);
       this.messageContent=null;
     }else{
       console.log("No message");

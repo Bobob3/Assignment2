@@ -14,16 +14,16 @@ export class SocketService {
     this.socket = io(SERVER_URL);
   }
 
-  public send(message: string, username: string): void {
+  public send(message: string): void {
     this.socket.emit('message', message);
-    this.socket.emit('username', username);
+   // this.socket.emit('username', username);
   }
-  public onMessage(): Observable<any> {
+   public onMessage(): Observable<any> {
     let observable = new Observable(observer=>{
-      this.socket.on('username', (data:string) => observer.next(data));
       this.socket.on('message', (data:string) => observer.next(data));
+      
     });
     return observable;
-  }
+  } 
 
 }
