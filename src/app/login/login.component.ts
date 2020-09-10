@@ -37,22 +37,11 @@ export class LoginComponent implements OnInit {
         if(data.valid == true){
           this.newuser = new User(data.username, data.birthdate,data.age,data.email)
           sessionStorage.setItem('currentUser',JSON.stringify(this.newuser));
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/chat']);
         }else{
           this.errormsg =("There was a problem with the credentials");
         }
       });
-    
-    
-   /* for (let i = 0; i < this.users.length; i++) {
-      if (this.email == this.users[i].email && this.password == this.users[i].pwd) {
-        this.router.navigateByUrl('/account/' + this.email);
-        break;
-      } else {
-        alert("incorrect email or password");
-
-      }
-    }*/
   }
 
 }
