@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  public chat(){
+  public chat(messageContent){
     if(this.messageContent){
       this.socketService.send(this.newuser.username, this.messageContent);
       this.messageContent=null;
