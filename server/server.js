@@ -11,7 +11,7 @@ const sockets = require('./socket.js');
 const server = require('./listen.js');
 
 const PORT = 3000;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://localhost:27017/chat';
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,8 +21,10 @@ sockets.connect(io, PORT);
 
 MongoClient.connect(url, {poolSize:10, useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if(err) {return console.log(err)}
+    
     const dbName = 'chat';
     const db = client.db(dbName);
+    console.log("DB created");
     
 
     require('./routes/add.js')(db, app);
