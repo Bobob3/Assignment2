@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-profile',
@@ -11,15 +13,13 @@ export class ProfileComponent implements OnInit {
   id:number = null;
   username:string = "";
   newuser:User;
-  constructor(private router:Router) { }
-
+  constructor(private router:Router, private http: HttpClient) { }
+  
   ngOnInit(){
-    this.newuser = JSON.parse(sessionStorage.getItem('currentUser'));
-    if(this.newuser != null){
-      this.username = this.newuser.username;
-    }else{
-      this.router.navigate(['/login']);
-    }
+    this.http.post<User>('http://localhost:3000/login', {username: this.username}).subscribe(
+      data=>{
+        this.username = data.username;
+      });
   }
   logout(){
     sessionStorage.clear();

@@ -17,3 +17,10 @@ Contains multiple commits of entire Assignment2 folder
  - image
  - role
 
+Each chat message is represented by a class that consists of
+ - id
+ - username
+ - message
+
+## Responsibilities
+
