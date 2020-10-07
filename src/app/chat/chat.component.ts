@@ -27,9 +27,11 @@ export class ChatComponent implements OnInit {
     console.log(json);
     
   }
+  //Attempt to create a room
   createR(){
     this.socketService.createRoom(this.Test);
   }
+  //Initialises socket connection
   private initIoConnection(){
      if(this.username != null){
       this.socketService.initSocket();
@@ -43,6 +45,7 @@ export class ChatComponent implements OnInit {
       this.router.navigate(['/login']);
     } 
   }
+  //Checks if a message was typed and sends it to the server
   public chat(messageContent){
     if(this.messageContent){
       this.socketService.send(this.messageContent);

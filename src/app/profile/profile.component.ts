@@ -16,15 +16,18 @@ export class ProfileComponent implements OnInit {
   constructor(private router:Router, private http: HttpClient) { }
   
   ngOnInit(){
+    //Tries to get username of logged in user
     this.http.post<User>('http://localhost:3000/login', {username: this.username}).subscribe(
       data=>{
         this.username = data.username;
       });
   }
+  //Used to log out 
   logout(){
-    sessionStorage.clear();
+    this.id = null;
     this.router.navigate(['/login']);
   }
+  //Prepares update user but uses methods from assignment 1
   updatedetails(event){
     event.preventDefault();
     this.newuser = JSON.parse(sessionStorage.getItem('currentUser'));

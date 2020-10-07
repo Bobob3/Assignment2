@@ -8,8 +8,8 @@ import { User } from '../user';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  currentUser:User;
-  username:string = "";
+  currentUser:User; //Sets currentUser as initial User class
+  username:string = ""; //Initialises username, email, image
   email:string = "";
   image: File = null;
   constructor(private router: Router) { }
@@ -26,6 +26,7 @@ export class AccountComponent implements OnInit {
     
     
   }
+  //Used to update profile using methods from assignment1
   updateprofile(){
     console.log(this.image);
     this.currentUser = new User(this.username, this.email);

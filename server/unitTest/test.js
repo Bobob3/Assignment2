@@ -3,8 +3,8 @@ var http = require('http');
 var read = require('../routes/read');
 
 
-describe('Tests for getting users', () =>{
-        it('should GET all users ', () =>{
+describe('Tests for getting error code', () =>{
+        it('should fail ', () =>{
             http.get('http://localhost:3000/chat', function(response){
                 // Assert the status code.
                 assert.equal(response.statusCode, 200);

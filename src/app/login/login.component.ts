@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     
   }
+  //When submit is pressed this checks to see if the user is valid
   itemClicked(event) {
     event.preventDefault();
     this.http.post<User>('http://localhost:3000/api/auth', {email: this.email, password: this.password}).subscribe(

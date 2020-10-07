@@ -24,3 +24,33 @@ Each chat message is represented by a class that consists of
 
 ## Responsibilities
 
+The client is responsible for displaying and updating the information that is stored on the server side such as the client receieves whether the login is correct by the server sending the authorised user login that matches the email and password unless the information is wrong. The server holds the database and the tables used and through the client gets requested to be viewed.
+
+## Routes
+
+ - Route to reading the users table that outputs the user that matches the email and password submitted
+
+ - Route to adding initial users into the database
+
+ - Route to edit a logged in user accessed from profile
+
+ - Route to viewing a profile to be able to edit/logout
+
+## Angular Architecture
+ ### Components
+    - App
+    - Account
+    - Chat
+    - Login
+    - Profile
+ ### Services
+    - chatservice
+    - socketservice
+ ### Models
+    - chatModel
+    - users
+ ### Routes
+    - Account
+    - Chat
+    - Login
+    - Profile
